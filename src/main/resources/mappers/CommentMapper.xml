@@ -9,11 +9,12 @@
       <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="images" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, product_id,content, user_id,images,create_time
+    id, product_id,content, user_id,images,create_time,user_name
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -23,7 +24,14 @@
   </select>
 
 
-  <select id="selectByProductId" resultMap="BaseResultMap" parameterType="int">
+  <select id="selectByProductId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from mmall_comment
+    WHERE product_id=#{productId}
+  </select>
+
+  <select id="findAllComment" resultMap="BaseResultMap" >
     SELECT
     <include refid="Base_Column_List"/>
     from mmall_comment

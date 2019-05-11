@@ -13,18 +13,22 @@ public class Comment implements Serializable {
     private Integer user_id;
     private String images;
     private Date create_time;
+    private String user_name;
 
-    public Comment(Integer id, Integer product_id, String content, Integer user_id, String images, Date create_time) {
+
+
+    public Comment() {
+          super();
+    }
+
+    public Comment(Integer id, Integer product_id, String content, Integer user_id, String images, Date create_time, String user_name) {
         this.id = id;
         this.product_id = product_id;
         this.content = content;
         this.user_id = user_id;
         this.images = images;
         this.create_time = create_time;
-    }
-
-    public Comment() {
-
+        this.user_name = user_name;
     }
 
     @Override
@@ -84,5 +88,13 @@ public class Comment implements Serializable {
 
     public void setCreate_time(Date create_time) {
         this.create_time = create_time;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
     }
 }

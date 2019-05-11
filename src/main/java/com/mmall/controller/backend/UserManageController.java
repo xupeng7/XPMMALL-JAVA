@@ -43,7 +43,7 @@ public class UserManageController {
         return response;
     }
 
-    @RequestMapping("list.do")
+    @RequestMapping(value = "list.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse getList(HttpSession session, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
                                   @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
@@ -55,6 +55,7 @@ public class UserManageController {
         }
         if(iUserService.checkAdminRole(user).isSuccess()){
             //填充业务
+            System.out.println(456);
             return iUserService.findAllUser(pageNum,pageSize);
         }else{
             return ServerResponse.createByErrorMessage("无权限操作");

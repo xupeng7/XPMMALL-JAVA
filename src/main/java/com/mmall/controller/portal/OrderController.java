@@ -36,6 +36,8 @@ public class OrderController {
 
     @Autowired
     private IOrderService iOrderService;
+    @Autowired
+    private ICommentService iCommentService;
 
 
     @RequestMapping("create.do")
@@ -165,25 +167,13 @@ public class OrderController {
 
 
 
-
-
-
-
-
-
-
-
-
-    @Autowired
-    private ICommentService iCommentService;
-
     @RequestMapping("comment.do")
     public ServerResponse<PageInfo> list(
             @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
             @RequestParam(value = "pageSize",defaultValue = "10") int pageSize,
             @RequestParam(value = "productId") int productId
     ){
-
+        System.out.println(123);
         return iCommentService.selectByProductId(pageNum,pageSize,productId);
     }
 

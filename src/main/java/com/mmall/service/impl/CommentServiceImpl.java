@@ -37,6 +37,16 @@ public class CommentServiceImpl implements ICommentService{
         return ServerResponse.createBySuccess(pageResult);
     }
 
+    @Override
+    public ServerResponse<PageInfo> findAllComment(int pageNum, int pageSize) {
+
+        PageHelper.startPage(pageNum,pageSize);
+        List<Comment> commentList=commentMapper.findAllComment();
+        PageInfo pageResult=new PageInfo(commentList);
+        pageResult.setList(commentList);
+        return ServerResponse.createBySuccess(pageResult);
+
+    }
 
 
 }

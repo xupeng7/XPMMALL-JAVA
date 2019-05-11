@@ -25,4 +25,13 @@ public class CommentController {
         System.out.println("jinlail");
        return iCommentService.selectByProductId(pageNum,pageSize,productId);
     }
+
+    @RequestMapping("allComment.do")
+    public ServerResponse findAll(
+            @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+            @RequestParam(value = "pageSize",defaultValue = "10") int pageSize
+    ){
+        System.out.println("jinlail");
+        return iCommentService.findAllComment(pageNum,pageSize);
+    }
 }

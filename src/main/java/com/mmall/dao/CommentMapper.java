@@ -9,5 +9,7 @@ import java.util.List;
 public interface CommentMapper {
    List<Comment> selectByProductId(Integer productId);
 
+   List<Comment> findAllComment();
+
    Comment selectByPrimaryKey(Integer id);
 }
