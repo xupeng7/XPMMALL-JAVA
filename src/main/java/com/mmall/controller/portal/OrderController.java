@@ -3,11 +3,13 @@ package com.mmall.controller.portal;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.demo.trade.config.Configs;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Maps;
 import com.mmall.common.Const;
 import com.mmall.common.ResponseCode;
 import com.mmall.common.ServerResponse;
 import com.mmall.pojo.User;
+import com.mmall.service.ICommentService;
 import com.mmall.service.IOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,7 +84,7 @@ public class OrderController {
 
     @RequestMapping("list.do")
     @ResponseBody
-    public ServerResponse list(HttpSession session, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+    public ServerResponse<PageInfo> list(HttpSession session, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
                                @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user ==null){
@@ -91,32 +93,6 @@ public class OrderController {
         }
         return iOrderService.getOrderList(user.getId(),pageNum,pageSize);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @RequestMapping("pay.do")
     @ResponseBody
     public ServerResponse pay(HttpSession session, Long orderNo, HttpServletRequest request){
@@ -198,7 +174,18 @@ public class OrderController {
 
 
 
+    @Autowired
+    private ICommentService iCommentService;
 
+    @RequestMapping("comment.do")
+    public ServerResponse<PageInfo> list(
+            @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+            @RequestParam(value = "pageSize",defaultValue = "10") int pageSize,
+            @RequestParam(value = "productId") int productId
+    ){
+
+        return iCommentService.selectByProductId(pageNum,pageSize,productId);
+    }
 
 
 
