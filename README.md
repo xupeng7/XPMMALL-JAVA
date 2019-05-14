@@ -1,1 +1,1 @@
-mmall_learning
+XXMMALL商城是一个简单的B2C企业电商平台,是个人的毕业设计产品
